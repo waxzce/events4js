@@ -1,0 +1,246 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>events4js API Documentation</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css?stamp=1312814145.65" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css?stamp=1312814145.65" />
+
+    <script type="text/javascript" src="assets/api-js?stamp=1312814145.65"></script>
+    <script type="text/javascript" src="assets/ac-js?stamp=1312814145.65"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://www.waxzce.org" title="events4js">events4js</a></h1>
+        <h3>events4js&nbsp; <span class="subtitle">1</span></h3>
+        <a href="./index.html" title="events4js">events4js</a> 
+            &gt; <a href="./module_events4js.html" title="events4js">events4js</a>
+                
+                 &gt; EventProducer.js (source view) 
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                    <div id="srcout">
+                        <style>
+                            #doc3 .classopts { display:none; }
+                        </style>
+<div class="highlight"><pre><span class="cm">/**</span>
+<span class="cm"> * @module events4js</span>
+<span class="cm"> */</span>
+<span class="kd">var</span> <span class="nx">EventProducer</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="cm">/**</span>
+<span class="cm">	* Abstract class for managing events</span>
+<span class="cm">	* @class EventProducer</span>
+<span class="cm">	* @constructor</span>
+<span class="cm">	**/</span>
+    <span class="nx">EventProducer</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">initialize</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">EventProducer</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span>
+
+
+
+    <span class="c1">// constructor:</span>
+    <span class="cm">/** </span>
+<span class="cm">	* @method initialize</span>
+<span class="cm">	* @description Initialization method.</span>
+<span class="cm">	* @protected</span>
+<span class="cm">	**/</span>
+    <span class="nx">p</span><span class="p">.</span><span class="nx">initialize</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">events</span> <span class="o">=</span> <span class="p">{};</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">allevents</span> <span class="o">=</span> <span class="p">[];</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">onces</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="p">};</span>
+    <span class="c1">// public methods:</span>
+    <span class="cm">/**</span>
+<span class="cm">	* @description Add an event listener</span>
+<span class="cm">	* @param eventName {string} the name of the event listened</span>
+<span class="cm">	* @param callback {function} the function trigged</span>
+<span class="cm">	* @method addEventListener</span>
+<span class="cm">	**/</span>
+    <span class="nx">p</span><span class="p">.</span><span class="nx">addEventListener</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">events</span><span class="p">[</span><span class="nx">eventName</span><span class="p">]</span> <span class="o">==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">events</span><span class="p">[</span><span class="nx">eventName</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">callback</span><span class="p">];</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">events</span><span class="p">[</span><span class="nx">eventName</span><span class="p">].</span><span class="nx">push</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+    <span class="cm">/**</span>
+<span class="cm">	* @description Add an once listener</span>
+<span class="cm">	* @param {string} eventName the name of the event listened</span>
+<span class="cm">	* @param {function} callback the function trigged</span>
+<span class="cm">	* @method addOnceListener</span>
+<span class="cm">	**/</span>
+    <span class="nx">p</span><span class="p">.</span><span class="nx">addOnceListener</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">onces</span><span class="p">[</span><span class="nx">eventName</span><span class="p">]</span> <span class="o">==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">onces</span><span class="p">[</span><span class="nx">eventName</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">callback</span><span class="p">];</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">onces</span><span class="p">[</span><span class="nx">eventName</span><span class="p">].</span><span class="nx">push</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+    <span class="cm">/**</span>
+<span class="cm">	* @description Add all events listener</span>
+<span class="cm">	* @param {function} callback the function trigged</span>
+<span class="cm">	* @method addAllEventsListener</span>
+<span class="cm">	**/</span>
+    <span class="nx">p</span><span class="p">.</span><span class="nx">addAllEventsListener</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">allevents</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="cm">/**</span>
+<span class="cm">	* @description Remove a listener </span>
+<span class="cm">	* @private</span>
+<span class="cm">	* @param {string} eventName the name of the event listened</span>
+<span class="cm">    * @param {function} callback the function trigged</span>
+<span class="cm">	* @param {array} ar the array of function where we want to remove</span>
+<span class="cm">	* @method _removeListener</span>
+<span class="cm">	**/</span>
+    <span class="nx">p</span><span class="p">.</span><span class="nx">_removeListener</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">ar</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">ar</span><span class="p">[</span><span class="nx">eventName</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">ee</span> <span class="k">in</span> <span class="nx">ar</span><span class="p">[</span><span class="nx">eventName</span><span class="p">])</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">ar</span><span class="p">[</span><span class="nx">eventName</span><span class="p">][</span><span class="nx">ee</span><span class="p">]</span> <span class="o">===</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">ar</span><span class="p">[</span><span class="nx">eventName</span><span class="p">].</span><span class="nx">splice</span><span class="p">(</span><span class="nx">ee</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="p">};</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+    <span class="cm">/**</span>
+<span class="cm">	* @description Remove an event listener</span>
+<span class="cm">	* @param {string} eventName the name of the event listened</span>
+<span class="cm">	* @param {function} callback the function trigged</span>
+<span class="cm">	* @method removeEventListener</span>
+<span class="cm">	**/</span>
+    <span class="nx">p</span><span class="p">.</span><span class="nx">removeEventListener</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_removeListener</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">events</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="cm">/**</span>
+<span class="cm">	* @description Remove an once listener</span>
+<span class="cm">	* @param {string} eventName the name of the once listened</span>
+<span class="cm">	* @param {function} callback the function trigged</span>
+<span class="cm">	* @method removeOnceListener</span>
+<span class="cm">	**/</span>
+    <span class="nx">p</span><span class="p">.</span><span class="nx">removeOnceListener</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_removeListener</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">onces</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="cm">/**</span>
+<span class="cm">	* @description Remove all event listeners</span>
+<span class="cm">	* @param {string} eventName the name of the event listened</span>
+<span class="cm">	* @method removeAllEventListeners</span>
+<span class="cm">	**/</span>
+    <span class="nx">p</span><span class="p">.</span><span class="nx">removeAllEventListeners</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">eventName</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">events</span><span class="p">[</span><span class="nx">eventName</span><span class="p">]</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="p">};</span>
+    <span class="cm">/**</span>
+<span class="cm">	* @description Remove all once listeners</span>
+<span class="cm">	* @param {string} eventName the name of the once listened</span>
+<span class="cm">	* @method removeAllOnceListeners</span>
+<span class="cm">	**/</span>
+    <span class="nx">p</span><span class="p">.</span><span class="nx">removeAllOnceListeners</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">eventName</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">onces</span><span class="p">[</span><span class="nx">eventName</span><span class="p">]</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="p">};</span>
+    <span class="cm">/**</span>
+<span class="cm">	* @description Remove all events listeners - for all events</span>
+<span class="cm">	* @method removeAllEventsListeners</span>
+<span class="cm">	**/</span>
+    <span class="nx">p</span><span class="p">.</span><span class="nx">removeAllEventsListeners</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">events</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="p">};</span>
+    <span class="cm">/**</span>
+<span class="cm">	* @description Fire an Event</span>
+<span class="cm">	* @param {string} eventName the name of the event fired</span>
+<span class="cm">	* @param {object} params optional : information about the event, forward to listeners</span>
+<span class="cm">	* @method fireEvent</span>
+<span class="cm">	**/</span>
+    <span class="nx">p</span><span class="p">.</span><span class="nx">fireEvent</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">onces</span><span class="p">[</span><span class="nx">eventName</span><span class="p">]</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">ee</span> <span class="k">in</span> <span class="k">this</span><span class="p">.</span><span class="nx">onces</span><span class="p">[</span><span class="nx">eventName</span><span class="p">])</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">onces</span><span class="p">[</span><span class="nx">eventName</span><span class="p">][</span><span class="nx">ee</span><span class="p">](</span><span class="nx">params</span><span class="p">);</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">onces</span><span class="p">[</span><span class="nx">eventName</span><span class="p">].</span><span class="nx">splice</span><span class="p">(</span><span class="nx">ee</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">events</span><span class="p">[</span><span class="nx">eventName</span><span class="p">]</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">ee</span> <span class="k">in</span> <span class="k">this</span><span class="p">.</span><span class="nx">events</span><span class="p">[</span><span class="nx">eventName</span><span class="p">])</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">events</span><span class="p">[</span><span class="nx">eventName</span><span class="p">][</span><span class="nx">ee</span><span class="p">](</span><span class="nx">params</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">ee</span> <span class="k">in</span> <span class="k">this</span><span class="p">.</span><span class="nx">allevents</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">allevents</span><span class="p">[</span><span class="nx">ee</span><span class="p">](</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">params</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="k">return</span> <span class="nx">EventProducer</span><span class="p">;</span>
+
+<span class="p">})();</span>
+</pre></div>
+                    </div>
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="module_events4js.html" title="events4js">events4js</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class=""><a href="EventProducer.html" title="EventProducer">EventProducer</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class=""><a href="bindings.js.html" title="bindings.js">bindings.js</a></li>
+                                <li class="selected"><a href="EventProducer.js.html" title="EventProducer.js">EventProducer.js</a></li>
+                        </ul>
+                    </div>
+
+
+
+
+
+            </div>
+		</div>
+	</div>
+	
+	<!--footer-->
+	<!--
+	<div id="ft">
+        <hr />
+	</div>
+	-->
+</div>
+<script type="text/javascript">
+    ALL_YUI_PROPS = [{"url": "EventProducer.html#method_addAllEventsListener", "access": "", "host": "EventProducer", "type": "method", "name": "addAllEventsListener"}, {"url": "EventProducer.html#method_addEventListener", "access": "", "host": "EventProducer", "type": "method", "name": "addEventListener"}, {"url": "EventProducer.html#method_addOnceListener", "access": "", "host": "EventProducer", "type": "method", "name": "addOnceListener"}, {"url": "EventProducer.html#method_fireEvent", "access": "", "host": "EventProducer", "type": "method", "name": "fireEvent"}, {"url": "EventProducer.html#method_initialize", "access": "protected", "host": "EventProducer", "type": "method", "name": "initialize"}, {"url": "EventProducer.html#method_removeAllEventListeners", "access": "", "host": "EventProducer", "type": "method", "name": "removeAllEventListeners"}, {"url": "EventProducer.html#method_removeAllEventsListeners", "access": "", "host": "EventProducer", "type": "method", "name": "removeAllEventsListeners"}, {"url": "EventProducer.html#method_removeAllOnceListeners", "access": "", "host": "EventProducer", "type": "method", "name": "removeAllOnceListeners"}, {"url": "EventProducer.html#method_removeEventListener", "access": "", "host": "EventProducer", "type": "method", "name": "removeEventListener"}, {"url": "EventProducer.html#method_removeOnceListener", "access": "", "host": "EventProducer", "type": "method", "name": "removeOnceListener"}];
+</script>
+</body>
+</html>
