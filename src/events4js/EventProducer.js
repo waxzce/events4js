@@ -129,17 +129,29 @@ var EventProducer = (function() {
     p.fireEvent = function(eventName, params) {
         if (this.onces[eventName] !== undefined) {
             for (var ee in this.onces[eventName]) {
-                this.onces[eventName][ee](params);
+                try {
+                    this.onces[eventName][ee](params);
+                } catch(e) {
+
+                    }
                 this.onces[eventName].splice(ee, 1);
             }
         }
         if (this.events[eventName] !== undefined) {
             for (var ee in this.events[eventName]) {
-                this.events[eventName][ee](params);
+                try {
+                    this.events[eventName][ee](params);
+                } catch(e) {
+
+                    }
             }
         }
         for (var ee in this.allevents) {
-            this.allevents[ee](eventName, params);
+            try {
+                this.allevents[ee](eventName, params);
+            } catch(e) {
+
+                }
         }
     };
 
