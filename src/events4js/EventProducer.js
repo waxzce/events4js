@@ -132,8 +132,9 @@ var EventProducer = (function() {
                 try {
                     this.onces[eventName][ee](params);
                 } catch(e) {
-
-                    }
+                    var log = require('logger4js');
+                    log.error('error when once ' + eventName + ' fire ', e);
+                }
                 this.onces[eventName].splice(ee, 1);
             }
         }
@@ -142,16 +143,18 @@ var EventProducer = (function() {
                 try {
                     this.events[eventName][ee](params);
                 } catch(e) {
-
-                    }
+                    var log = require('logger4js');
+                    log.error('error when event ' + eventName + ' fire ', e);
+                }
             }
         }
         for (var ee in this.allevents) {
             try {
                 this.allevents[ee](eventName, params);
             } catch(e) {
-
-                }
+                var log = require('logger4js');
+                log.error('error when allevents ' + eventName + ' fire ', e);
+            }
         }
     };
 
