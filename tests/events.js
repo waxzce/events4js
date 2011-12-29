@@ -73,6 +73,10 @@ $(function () {
             autoLaunch: {
                 'end': ['success', 'error', 'retry'],
                 'a': ['z', 'x', 'y']
+            },
+            waitFor: {
+                'one': ['two', 'tree'],
+                'l': ['m', 'n']
             }
         });
     }
@@ -88,4 +92,8 @@ $(function () {
     swc.fireEvent('success');
     swc.fireEvent('y');
 
+    swc.fireEvent('m');
+    swc.fireEvent('two');
+    swc.fireEvent('n');
+    console.log(swc);
 });
