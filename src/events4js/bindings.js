@@ -1,2 +1,1 @@
-
 exports.EventProducer = EventProducer;

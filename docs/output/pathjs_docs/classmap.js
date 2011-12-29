@@ -1,12 +1,16 @@
-YAHOO.env.classMap = {"EventProducer": "events4js"};
+YAHOO.env.classMap = {
+    "EventProducer": "events4js"
+};
 
-YAHOO.env.resolveClass = function(className) {
-    var a=className.split('.'), ns=YAHOO.env.classMap;
+YAHOO.env.resolveClass = function (className) {
+    var a = className.split('.'),
+        ns = YAHOO.env.classMap;
 
-    for (var i=0; i<a.length; i=i+1) {
+    for (var i = 0; i < a.length; i = i + 1) {
         if (ns[a[i]]) {
             ns = ns[a[i]];
-        } else {
+        }
+        else {
             return null;
         }
     }

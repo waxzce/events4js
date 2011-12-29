@@ -1,32 +1,31 @@
-$(function() {
+$(function () {
     var e4js = require('events4js');
 
-    Some_Event_Producer = function() {
+    Some_Event_Producer = function () {
         this.initialize();
     }
     var p = Some_Event_Producer.prototype = new e4js.EventProducer();
     p.initialize_event = p.initialize;
 
-    p.initialize = function() {
+    p.initialize = function () {
         this.initialize_event();
     }
 
     var s = new Some_Event_Producer();
 
 
-    s.addEventListener('myevent',
-    function(e) {
+    s.addEventListener('myevent', function (e) {
         console.log(e);
     });
 
 
-    var f = function() {
+    var f = function () {
         console.log('I am here');
     };
-    var fo = function() {
+    var fo = function () {
         console.log('show on time only');
     };
-    var fno = function() {
+    var fno = function () {
         console.log('never show');
     };
 
@@ -60,4 +59,33 @@ $(function() {
     });
 
     s.removeAllEventsListeners('myevent');
+
+
+
+    Some_Event_Producer_withConfig = function () {
+        this.initialize();
+    }
+    var pp = Some_Event_Producer_withConfig.prototype = new e4js.EventProducer();
+    pp.initialize_event = pp.initialize;
+
+    pp.initialize = function () {
+        this.initialize_event({
+            autoLaunch: {
+                'end': ['success', 'error', 'retry'],
+                'a': ['z', 'x', 'y']
+            }
+        });
+    }
+
+    var swc = new Some_Event_Producer_withConfig();
+    swc.addAllEventsListener(function (en, e) {
+        console.log('event name : ' + en);
+        if (e) {
+            console.log(e);
+        }
+    });
+
+    swc.fireEvent('success');
+    swc.fireEvent('y');
+
 });
