@@ -26,6 +26,7 @@ var EventProducer = (function () {
         this._e4js.events = {};
         this._e4js.allevents = [];
         this._e4js.onces = {};
+        this._e4js.eventsfollow = [];
         if (config != undefined) {
             if (config.autoLaunch != undefined) {
                 for (var i in config.autoLaunch) {
@@ -108,12 +109,15 @@ var EventProducer = (function () {
             }
         }
     };
+    p._addEventFollow = function (eventName) {
+        this._e4js.eventsfollow.push(eventName);
+    };
     p._repeatEvent_fnct_producer = function (eventName) {
         var en = eventName;
         var t = this;
-        var fn = this.fireEvent;
-        return function (e) {
-            fn.apply(t, [en, e])
+        var fn = this._addEventFollow;
+        return function () {
+            fn.apply(t, [en])
         };
     };
 
@@ -134,7 +138,7 @@ var EventProducer = (function () {
                     for (var ii in wfv[i]) {
                         wfv[i][ii] = false;
                     }
-                    this.fireEvent(i);
+                    this._e4js.eventsfollow.push(i)
                 }
             }
         }
@@ -195,6 +199,7 @@ var EventProducer = (function () {
      * @method fireEvent
      **/
     p.fireEvent = function (eventName, params) {
+        this._e4js.eventsfollow = [];
         if (this._e4js.onces[eventName] !== undefined) {
             for (var ee in this._e4js.onces[eventName]) {
                 try {
@@ -227,6 +232,10 @@ var EventProducer = (function () {
                 log.error('error when allevents ' + eventName + ' fire ', e);
             }
         }
+        for (var ee in this._e4js.eventsfollow) {
+            this.fireEvent(this._e4js.eventsfollow[ee], params);
+        }
+        this._e4js.eventsfollow = [];
     };
 
     return EventProducer;
