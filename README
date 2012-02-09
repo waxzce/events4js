@@ -21,7 +21,7 @@ Under MIT licence
 HOW TO USE
 ----------
 
-The goal of event4js is give the possibility of produce events from any object.
+The goal of events4js is give the possibility of produce events from any object.
 
 Create an EventProducer :
 __________________________________________________________________________________________
