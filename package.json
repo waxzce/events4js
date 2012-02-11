@@ -1,0 +1,23 @@
+{
+   "name": "events4js",
+   "namespace": "org.clevercloud",
+   "version": "1.0",
+   "description": "events for yajas",
+   "keywords": [
+       "events"
+   ],
+   "maintainers": [
+       {
+           "name": "Quentin ADAM",
+           "email": "quentin.adam@waxzce.org",
+           "web": "http://www.waxzce.org" 
+       } 
+   ],
+   "contributors": [
+       {
+           "name": "Quentin ADAM",
+           "email": "quentin.adam@waxzce.org",
+           "web": "http://www.waxzce.org" 
+       }
+   ]
+}

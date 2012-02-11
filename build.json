@@ -1,0 +1,19 @@
+{
+	"variants": {
+    "supported": ["browser","yajas"],
+	  "default": "browser"
+  },
+	"already_build":true,
+	"files":[
+		{
+			"path":"events4js/EventProducer.js"
+		},
+		{
+			"path":"events4js/bindings.js"
+		}
+	],
+	"src_dir" : "src",
+	"build_dir" : "build",
+	"include_mode" : "require"
+}
+
