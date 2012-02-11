@@ -1,6 +1,8 @@
 {
-	"variant":["browser","yajas"],
-	"default_variant":"browser",
+	"variants": {
+    "supported": ["browser","yajas"],
+	  "default": "browser"
+  },
 	"already_build":true,
 	"files":[
 		{
